@@ -10,6 +10,4 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
     AnswerDTO findByUid(String uid);
 
     AnswerDTO findByAnswer(String answer);
-
-    void deleteByUid(String uid);
 }

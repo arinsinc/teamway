@@ -1,5 +1,10 @@
 package com.teamway.utils;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ResponseSerializer {
     private Boolean success;
     private String code;

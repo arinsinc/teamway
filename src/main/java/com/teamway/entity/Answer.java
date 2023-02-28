@@ -21,7 +21,6 @@ public class Answer {
     @Id
     @GenericGenerator(name="answer_seq", strategy = "sequence")
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "answer_seq")
-    @Column(name="id")
     private long id;
 
     @Column(name="uid")
@@ -39,7 +38,7 @@ public class Answer {
     private Personality personality;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name="question_id")
     private Question question;
 

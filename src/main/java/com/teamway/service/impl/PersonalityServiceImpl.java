@@ -5,12 +5,11 @@ import com.teamway.dao.QuestionRepository;
 import com.teamway.dto.QuestionDTO;
 import com.teamway.entity.Personality;
 import com.teamway.entity.Question;
+import com.teamway.exception.InvalidInputException;
 import com.teamway.mapper.AnswerMapper;
 import com.teamway.mapper.QuestionMapper;
 import com.teamway.service.PersonalityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +43,9 @@ public class PersonalityServiceImpl implements PersonalityService {
     @Override
     @Transactional
     public void saveQuestion(QuestionDTO question) {
+        if (question.getAnswers().isEmpty()) {
+            throw new InvalidInputException("Answers can't be empty");
+        }
         questionRepository.save(questionMapper.questionDTOToQuestion(question));
     }
 
@@ -57,6 +59,9 @@ public class PersonalityServiceImpl implements PersonalityService {
         Question questionResult = questionMapper.questionDTOToQuestion(questionRepository.findByUid(question.getUid()));
         questionResult.setQuestion(question.getQuestion());
         questionResult.setAnswers(answerMapper.answerDTOListToAnswerList(question.getAnswers()));
+        if (question.getAnswers().isEmpty()) {
+            throw new InvalidInputException("Answers can't be empty");
+        }
         questionRepository.save(questionResult);
     }
 
@@ -72,8 +77,7 @@ public class PersonalityServiceImpl implements PersonalityService {
 
     @Override
     public List<QuestionDTO> getQuestions() {
-        Pageable pageable = PageRequest.of(0, 5);
-        return questionRepository.getQuestions(pageable);
+        return questionMapper.questionListToQuestionDTOList(questionRepository.findAll());
     }
 
     /**

@@ -39,7 +39,7 @@ public class PersonalityController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("questions/check-personality")
+    @PostMapping("questions/check-personality")
     public ResponseEntity<ResponseSerializer> checkPersonality(@RequestBody LinkedHashMap<String,String> questions) {
         String result = personalityService.checkPersonality(questions);
         ResponseSerializer response = new ResponseSerializer(true, "success", "Result fetched successfully", result);

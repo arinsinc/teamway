@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +23,6 @@ public class Question {
     @Id
     @GenericGenerator(name="question_seq", strategy = "sequence")
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "question_seq")
-    @Column(name="id")
     private long id;
 
     @Column(name="uid")
@@ -36,8 +36,9 @@ public class Question {
     private String question;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "question", cascade={CascadeType.ALL}, orphanRemoval = true)
-    private List<Answer> answers;
+    @OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.PERSIST}, orphanRemoval = true)
+    @JoinColumn(name="question_id")
+    private List<Answer> answers = new ArrayList<>();
 
     @Column(name="created_at")
     @NotNull
