@@ -13,3 +13,9 @@ for the questions in the DB.
 6. For conversion to Entity from DTO & vice-versa, mapper library is used.
 7. Exception handler is created for handling exceptions.
 8. ResponseSerializer object is returned as API response with unified format for all requests.
+9. UI layer added, created using React & Material UI.
+10. React components follows material ui conventions.
+
+![alt landing-page](landing-page.png)
+![alt questions](questions.png)
+![alt result](result.png)
