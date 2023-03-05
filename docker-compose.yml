@@ -1,0 +1,14 @@
+version: '3'
+services:
+  teamway-api:
+    image: "teamway-api:1.0.0"
+    container_name: personality-api
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING.PROFILES.ACTIVE=default
+  teamway-ui:
+    image: "teamway-ui:1.0.0"
+    container_name: personality-ui
+    ports:
+      - "3000:3000"

@@ -15,6 +15,16 @@ for the questions in the DB.
 8. ResponseSerializer object is returned as API response with unified format for all requests.
 9. UI layer added, created using React & Material UI.
 10. React components follows material ui conventions.
+11. Docker support added, to run both backend & frontend docker containers, run the following commands:
+```shell
+cd teamway/
+mvn clean package
+docker build -t teamway-api:1.0.0 .
+cd teamway-ui/
+docker build -t teamway-ui:1.0.0 .
+cd ..
+docker-compose up
+```
 
 ![alt landing-page](landing-page.png)
 ![alt questions](questions.png)
